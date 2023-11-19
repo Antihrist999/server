@@ -18,7 +18,7 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[]> {
-    return this.userModel.findAll();
+    return this.userModel.findAll({ include: { all: true } });
   }
 
   findOne(id: string): Promise<User> {
