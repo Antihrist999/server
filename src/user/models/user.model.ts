@@ -4,6 +4,8 @@ import { IndividualCard } from 'src/individual-card/models/individual-card.model
 
 @Table
 export class User extends Model {
+  @Column({ autoIncrement: true, primaryKey: true })
+  id: number;
   @ApiProperty({ description: 'Имя' })
   @Column
   firstName: string;

@@ -1,5 +1,10 @@
-/* import { PartialType } from '@nestjs/mapped-types';
+import { PartialType } from '@nestjs/mapped-types';
 import { CreateIndividualCardDto } from './create-individual-card.dto';
- */
-/* export class UpdateIndividualCardDto extends PartialType(CreateIndividualCardDto) {}
- */
+import { ApiProperty } from '@nestjs/swagger';
+
+export class UpdateIndividualCardDto extends PartialType(
+  CreateIndividualCardDto,
+) {
+  @ApiProperty({ description: 'Баланс бонусов' })
+  account: number;
+}

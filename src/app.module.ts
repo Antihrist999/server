@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UsersModule } from './user/users.module';
 import { IndividualCardModule } from './individual-card/individual-card.module';
+import { ProductModule } from './product/product.module';
+import { PriceModule } from './price/price.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { IndividualCardModule } from './individual-card/individual-card.module';
     }),
     UsersModule,
     IndividualCardModule,
+    ProductModule,
+    PriceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
