@@ -21,7 +21,14 @@ export class CartService {
       where: {
         userId,
       },
-      include: { all: true },
+      include: {
+        all: true,
+        include: [
+          {
+            all: true,
+          },
+        ],
+      },
     });
   }
 
@@ -30,7 +37,14 @@ export class CartService {
       where: {
         id,
       },
-      include: { all: true },
+      include: {
+        all: true,
+        include: [
+          {
+            all: true,
+          },
+        ],
+      },
     });
   }
   findByUserId(userId: number): Promise<Cart> {
@@ -38,7 +52,14 @@ export class CartService {
       where: {
         userId,
       },
-      include: { all: true },
+      include: {
+        all: true,
+        include: [
+          {
+            all: true,
+          },
+        ],
+      },
     });
   }
   async remove(id: number): Promise<void> {
