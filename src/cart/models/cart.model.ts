@@ -4,9 +4,15 @@ import { Product } from 'src/product/models/product.model';
 
 @Table
 export class Cart extends Model {
+  @ApiProperty({ description: 'Идентификатор' })
+  @Column({ autoIncrement: true, primaryKey: true })
+  id: number;
   @ApiProperty({ description: 'Колличество' })
   @Column
   counter: number;
+  @ApiProperty({ description: 'Продукт в корзине' })
+  @Column
+  isCarts: boolean;
   @ApiProperty({ description: 'Выделение продукта в корзине' })
   @Column
   isSelected: boolean;

@@ -5,6 +5,9 @@ import { User } from 'src/user/models/user.model';
 
 @Table
 export class Rating extends Model {
+  @ApiProperty({ description: 'Идентификатор' })
+  @Column({ autoIncrement: true, primaryKey: true })
+  id: number;
   @Column
   @ForeignKey(() => Product)
   @ApiProperty({ description: 'Идентификатор продукта' })

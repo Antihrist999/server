@@ -4,11 +4,43 @@ import { CreateCartDto } from './dto/create-cart.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Cart } from './models/cart.model';
 @ApiTags('Корзина')
-@Controller('cart')
+@Controller('carts')
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
-  @Post()
+  @Get('/all/')
+  @ApiOperation({
+    summary: 'Поиск корзины по ид пользователя',
+  })
+  @ApiResponse({ status: 200, type: Cart })
+  findAll(
+    @Param('userId') userId: number,
+    @Param('productId') productId: number,
+  ) {
+    return this.cartService.findAll(userId, productId);
+  }
+
+  @Get(':userId,:productId')
+  @ApiOperation({
+    summary: 'Поиск корзины по ид корзины',
+  })
+  @ApiResponse({ status: 200, type: Cart })
+  findOne(
+    @Param('userId') userId: number,
+    @Param('productId') productId: number,
+  ) {
+    return this.cartService.findOne(userId, productId);
+  }
+
+  @Post('update/')
+  @ApiOperation({
+    summary: 'Обновить корзину',
+  })
+  @ApiResponse({ status: 200, type: Cart })
+  update(@Body() createCartDto: CreateCartDto) {
+    return this.cartService.update(createCartDto);
+  }
+  @Post('create')
   @ApiOperation({
     summary: 'Создать корзину',
   })
@@ -17,35 +49,12 @@ export class CartController {
     return this.cartService.create(createCartDto);
   }
 
-  @Get(':userId')
-  @ApiOperation({
-    summary: 'Поиск корзины по ид пользователя',
-  })
-  @ApiResponse({ status: 200, type: Cart })
-  findAll(@Param('userId') userId: number) {
-    return this.cartService.findAll(userId);
-  }
-
-  @Get(':id')
-  @ApiOperation({
-    summary: 'Поиск корзины по ид корзины',
-  })
-  @ApiResponse({ status: 200, type: Cart })
-  findOne(@Param('id') id: number) {
-    return this.cartService.findOne(+id);
-  }
-
-  /*   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateCartDto: UpdateCartDto) {
-    return this.cartService.update(+id, updateCartDto);
-  } */
-
-  @Delete(':id')
+  /*   @Delete(':id')
   @ApiOperation({
     summary: 'Удаление корзины по ид',
   })
   @ApiResponse({ status: 200, type: Cart })
   remove(@Param('id') id: number) {
     return this.cartService.remove(+id);
-  }
+  } */
 }

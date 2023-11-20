@@ -6,10 +6,19 @@ import { CreateFavoriteDto } from './dto/create-favorite.dto';
 import { FavoriteService } from './favorite.service';
 
 @ApiTags('Избранное')
-@Controller('favorite')
+@Controller('favorites')
 export class FavoriteController {
   constructor(private readonly favoriteService: FavoriteService) {}
-  @Post()
+
+  @Post('update/')
+  @ApiOperation({
+    summary: 'Обновить',
+  })
+  @ApiResponse({ status: 200, type: Favorite })
+  update(@Body() createFavoriteDto: CreateFavoriteDto) {
+    return this.favoriteService.update(createFavoriteDto);
+  }
+  @Post('create/')
   @ApiOperation({
     summary: 'Создать',
   })
@@ -18,7 +27,7 @@ export class FavoriteController {
     return this.favoriteService.create(createFavoriteDto);
   }
 
-  @Get(':userId')
+  @Get('/all/')
   @ApiOperation({
     summary: 'Получить список',
   })
@@ -30,9 +39,12 @@ export class FavoriteController {
     summary: 'Получить список избранного',
   })
   @ApiResponse({ status: 200, type: [Favorite] })
-  @Get(':productId')
-  findOne(@Param('productId') productId: number) {
-    return this.favoriteService.findOne(+productId);
+  @Get(':userId,:productId')
+  findOne(
+    @Param('userId') userId: number,
+    @Param('productId') productId: number,
+  ) {
+    return this.favoriteService.findByUserIdAndProductId(userId, productId);
   }
 
   /*   @Patch(':id')

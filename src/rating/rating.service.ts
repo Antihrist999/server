@@ -15,6 +15,17 @@ export class RatingService {
       ...createRatingDto,
     });
   }
+  update(createRatingDto: CreateRatingDto): Promise<Rating> {
+    this.RatingModel.update(
+      { ...createRatingDto },
+      { where: { id: createRatingDto.id } },
+    );
+    return this.RatingModel.findOne({
+      where: {
+        id: createRatingDto.id,
+      },
+    });
+  }
 
   async findAll(): Promise<Rating[]> {
     return this.RatingModel.findAll({
@@ -24,6 +35,14 @@ export class RatingService {
 
   findOne(productId: number): Promise<Rating> {
     return this.RatingModel.findOne({
+      where: {
+        productId,
+      },
+      include: { all: true },
+    });
+  }
+  findByProductId(productId: number): Promise<Rating[]> {
+    return this.RatingModel.findAll({
       where: {
         productId,
       },

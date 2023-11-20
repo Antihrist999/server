@@ -15,6 +15,17 @@ export class FavoriteService {
       ...createFavoriteDto,
     });
   }
+  update(createFavoriteDto: CreateFavoriteDto): Promise<Favorite> {
+    this.favoriteModel.update(
+      { ...createFavoriteDto },
+      { where: { id: createFavoriteDto.id } },
+    );
+    return this.favoriteModel.findOne({
+      where: {
+        id: createFavoriteDto.id,
+      },
+    });
+  }
 
   async findAll(userId: number): Promise<Favorite[]> {
     return this.favoriteModel.findAll({
@@ -33,12 +44,15 @@ export class FavoriteService {
       include: { all: true },
     });
   }
-  findByUserId(userId: number): Promise<Favorite> {
+  findByUserIdAndProductId(
+    userId: number,
+    productId: number,
+  ): Promise<Favorite> {
     return this.favoriteModel.findOne({
       where: {
         userId,
+        productId,
       },
-      include: { all: true },
     });
   }
   async remove(id: number): Promise<void> {

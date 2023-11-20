@@ -6,19 +6,27 @@ import { CreateRatingDto } from './dto/create-rating.dto';
 import { RatingService } from './rating.service';
 
 @ApiTags('Рейтинг')
-@Controller('rating')
+@Controller('ratings')
 export class RatingController {
   constructor(private readonly ratingService: RatingService) {}
-  @Post()
+  @Post('update/')
   @ApiOperation({
-    summary: 'Создать рейтинг',
+    summary: 'Обновить',
+  })
+  @ApiResponse({ status: 200, type: Rating })
+  update(@Body() createRatingDto: CreateRatingDto) {
+    return this.ratingService.update(createRatingDto);
+  }
+  @Post('create/')
+  @ApiOperation({
+    summary: 'Создать',
   })
   @ApiResponse({ status: 200, type: Rating })
   create(@Body() createRatingDto: CreateRatingDto) {
     return this.ratingService.create(createRatingDto);
   }
 
-  @Get()
+  @Get('all/')
   @ApiOperation({
     summary: 'Получить список рейтингов',
   })
@@ -31,8 +39,8 @@ export class RatingController {
   })
   @ApiResponse({ status: 200, type: [Rating] })
   @Get(':productId')
-  findOne(@Param('productId') productId: number) {
-    return this.ratingService.findOne(+productId);
+  findByProductId(@Param('productId') productId: number) {
+    return this.ratingService.findByProductId(productId);
   }
 
   /*   @Patch(':id')

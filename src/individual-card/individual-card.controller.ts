@@ -10,7 +10,7 @@ import {
 /* import { UpdateIndividualCardDto } from './dto/update-individual-card.dto'; */
 import { IndividualCard } from './models/individual-card.model';
 @ApiTags('Индивидуальная карточка клиента')
-@Controller('individualCard')
+@Controller('individualCards')
 export class IndividualCardController {
   constructor(private readonly individualCardService: IndividualCardService) {}
 
