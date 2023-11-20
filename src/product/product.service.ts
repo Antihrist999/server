@@ -1,36 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
-import { Product } from './models/product.model';
 import { InjectModel } from '@nestjs/sequelize';
+import { Product } from './models/Product.model';
+import { CreateProductDto } from './dto/create-Product.dto';
 
 @Injectable()
 export class ProductService {
   constructor(
     @InjectModel(Product)
-    private readonly productModel: typeof Product,
+    private readonly ProductModel: typeof Product,
   ) {}
-  create(createProductDto: CreateProductDto) {
-    return this.create({ ...createProductDto });
-  }
 
-  findAll() {
-    return `This action returns all product`;
-  }
-
-  findOne(id: number) {
-    return this.productModel.findOne({
-      where: {
-        id,
-      },
+  create(createProductDto: CreateProductDto): Promise<Product> {
+    return this.ProductModel.create({
+      ...createProductDto,
     });
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async findAll(): Promise<Product[]> {
+    return this.ProductModel.findAll({
+      include: { all: true },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  findOne(id: number): Promise<Product> {
+    return this.ProductModel.findOne({
+      where: {
+        id,
+      },
+      include: { all: true },
+    });
+  }
+  async remove(id: number): Promise<void> {
+    const Product = await this.findOne(id);
+    await Product.destroy();
   }
 }

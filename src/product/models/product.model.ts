@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Model, Table } from 'sequelize-typescript';
+import { Column, HasOne, Model, Table } from 'sequelize-typescript';
+import { Price } from 'src/price/models/price.model';
 
 @Table
 export class Product extends Model {
@@ -21,4 +22,7 @@ export class Product extends Model {
   @ApiProperty({ description: 'Масса в г' })
   @Column
   mass: number;
+  @ApiProperty({ description: 'Информация о цене' })
+  @HasOne(() => Price, 'productId')
+  price: Price;
 }

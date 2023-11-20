@@ -6,6 +6,7 @@ import { UsersModule } from './user/users.module';
 import { IndividualCardModule } from './individual-card/individual-card.module';
 import { ProductModule } from './product/product.module';
 import { PriceModule } from './price/price.module';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { PriceModule } from './price/price.module';
       port: 5432,
       username: 'postgres',
       password: 'postgres',
-      database: 'database',
+      database: 'postgres',
       autoLoadModels: true,
       synchronize: false,
     }),
@@ -23,6 +24,7 @@ import { PriceModule } from './price/price.module';
     IndividualCardModule,
     ProductModule,
     PriceModule,
+    CartModule,
   ],
   controllers: [AppController],
   providers: [AppService],

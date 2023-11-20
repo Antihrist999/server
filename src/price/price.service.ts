@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePriceDto } from './dto/create-price.dto';
-import { UpdatePriceDto } from './dto/update-price.dto';
+import { InjectModel } from '@nestjs/sequelize';
+import { Price } from './models/Price.model';
+import { CreatePriceDto } from './dto/create-Price.dto';
 
 @Injectable()
 export class PriceService {
-  create(createPriceDto: CreatePriceDto) {
-    return 'This action adds a new price';
+  constructor(
+    @InjectModel(Price)
+    private readonly PriceModel: typeof Price,
+  ) {}
+
+  create(createPriceDto: CreatePriceDto): Promise<Price> {
+    return this.PriceModel.create({
+      ...createPriceDto,
+    });
   }
 
-  findAll() {
-    return `This action returns all price`;
+  async findAll(): Promise<Price[]> {
+    return this.PriceModel.findAll({
+      include: { all: true },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} price`;
+  findOne(productId: number): Promise<Price> {
+    return this.PriceModel.findOne({
+      where: {
+        productId,
+      },
+      include: { all: true },
+    });
   }
-
-  update(id: number, updatePriceDto: UpdatePriceDto) {
-    return `This action updates a #${id} price`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} price`;
+  async remove(id: number): Promise<void> {
+    const Price = await this.findOne(id);
+    await Price.destroy();
   }
 }
