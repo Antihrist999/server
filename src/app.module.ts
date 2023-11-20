@@ -7,6 +7,8 @@ import { IndividualCardModule } from './individual-card/individual-card.module';
 import { ProductModule } from './product/product.module';
 import { PriceModule } from './price/price.module';
 import { CartModule } from './cart/cart.module';
+import { RatingModule } from './rating/rating.module';
+import { FavoriteModule } from './favorite/favorite.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { CartModule } from './cart/cart.module';
     ProductModule,
     PriceModule,
     CartModule,
+    RatingModule,
+    FavoriteModule,
   ],
   controllers: [AppController],
   providers: [AppService],
