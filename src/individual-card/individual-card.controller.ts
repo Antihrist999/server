@@ -32,11 +32,12 @@ export class IndividualCardController {
     return this.individualCardService.findAll();
   }
 
-  @Get(':userId')
+  @Get('userId/:userId')
   @ApiOperation({
     summary: 'Получить индивидуальную карточку по ид пользователя',
   })
   findOne(@Param('userId') userId: number) {
+    console.log('individualCardService');
     return this.individualCardService.findByUserId(+userId);
   }
   @Delete(':id')

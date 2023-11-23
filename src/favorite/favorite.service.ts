@@ -32,7 +32,14 @@ export class FavoriteService {
       where: {
         userId,
       },
-      include: { all: true },
+      include: {
+        all: true,
+        include: [
+          {
+            all: true,
+          },
+        ],
+      },
     });
   }
 

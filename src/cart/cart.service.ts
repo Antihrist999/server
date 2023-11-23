@@ -10,12 +10,11 @@ export class CartService {
     private readonly cartModel: typeof Cart,
   ) {}
 
-  async findAll(userId: number, productId: number): Promise<Cart[]> {
+  async findAll(userId: number): Promise<Cart[]> {
     console.log('findAll');
     return this.cartModel.findAll({
       where: {
         userId,
-        productId,
       },
       include: {
         all: true,
@@ -28,12 +27,10 @@ export class CartService {
     });
   }
 
-  findOne(userId: number, productId: number): Promise<Cart> {
-    console.log('findOne');
+  findOne(id: number): Promise<Cart> {
     return this.cartModel.findOne({
       where: {
-        userId,
-        productId,
+        id,
       },
     });
   }
@@ -49,6 +46,15 @@ export class CartService {
             all: true,
           },
         ],
+      },
+    });
+  }
+  findByUserIdAndProductId(userId: number, productId: number): Promise<Cart> {
+    console.log('findOne');
+    return this.cartModel.findOne({
+      where: {
+        userId,
+        productId,
       },
     });
   }
@@ -69,8 +75,8 @@ export class CartService {
       ...createCartDto,
     });
   }
-  /*   async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<void> {
     const Cart = await this.findOne(id);
     await Cart.destroy();
-  } */
+  }
 }

@@ -8,16 +8,13 @@ import { Cart } from './models/cart.model';
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
-  @Get('/all/')
+  @Get('all/:userId')
   @ApiOperation({
     summary: 'Поиск корзины по ид пользователя',
   })
   @ApiResponse({ status: 200, type: Cart })
-  findAll(
-    @Param('userId') userId: number,
-    @Param('productId') productId: number,
-  ) {
-    return this.cartService.findAll(userId, productId);
+  findAll(@Param('userId') userId: number) {
+    return this.cartService.findAll(userId);
   }
 
   @Get(':userId,:productId')
@@ -25,11 +22,11 @@ export class CartController {
     summary: 'Поиск корзины по ид корзины',
   })
   @ApiResponse({ status: 200, type: Cart })
-  findOne(
+  findByUserIdAndProductId(
     @Param('userId') userId: number,
     @Param('productId') productId: number,
   ) {
-    return this.cartService.findOne(userId, productId);
+    return this.cartService.findByUserIdAndProductId(userId, productId);
   }
 
   @Post('update/')
@@ -49,12 +46,12 @@ export class CartController {
     return this.cartService.create(createCartDto);
   }
 
-  /*   @Delete(':id')
+  @Delete(':id')
   @ApiOperation({
     summary: 'Удаление корзины по ид',
   })
   @ApiResponse({ status: 200, type: Cart })
   remove(@Param('id') id: number) {
     return this.cartService.remove(+id);
-  } */
+  }
 }

@@ -27,7 +27,7 @@ export class FavoriteController {
     return this.favoriteService.create(createFavoriteDto);
   }
 
-  @Get('/all/')
+  @Get('all/:userId')
   @ApiOperation({
     summary: 'Получить список',
   })
@@ -52,7 +52,7 @@ export class FavoriteController {
     return this.FavoriteService.update(+id, updateFavoriteDto);
   } */
   @ApiOperation({
-    summary: 'Удаление рейтинг',
+    summary: 'Удаление избранное',
   })
   @Delete(':id')
   remove(@Param('id') id: string) {

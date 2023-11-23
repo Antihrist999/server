@@ -31,10 +31,19 @@ export class ProductController {
     summary: 'Получить продукт по ид',
   })
   @ApiResponse({ status: 200, type: Product })
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.productService.findOne(+id);
   }
 
+  @Get('/name/:name')
+  @ApiOperation({
+    summary: 'Получить продукт по Наименованию',
+  })
+  @ApiResponse({ status: 200, type: [Product] })
+  findProductByName(@Param('name') name: string) {
+    console.log(name);
+    return this.productService.findProductByName(name);
+  }
   /*  @Patch(':id')
   update(@Param('id') id: string) {
     return this.productService.update(+id);
