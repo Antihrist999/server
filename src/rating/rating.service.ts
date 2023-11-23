@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Rating } from './models/price.model';
+import { Rating } from './models/rating.model';
 import { CreateRatingDto } from './dto/create-rating.dto';
 
 @Injectable()
@@ -47,6 +47,14 @@ export class RatingService {
         productId,
       },
       include: { all: true },
+    });
+  }
+  findByProductIdAndUserId(productId: number, userId: number): Promise<Rating> {
+    return this.RatingModel.findOne({
+      where: {
+        productId,
+        userId,
+      },
     });
   }
   async remove(id: number): Promise<void> {

@@ -37,7 +37,6 @@ export class IndividualCardController {
     summary: 'Получить индивидуальную карточку по ид пользователя',
   })
   findOne(@Param('userId') userId: number) {
-    console.log('individualCardService');
     return this.individualCardService.findByUserId(+userId);
   }
   @Delete(':id')

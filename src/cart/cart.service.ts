@@ -11,7 +11,6 @@ export class CartService {
   ) {}
 
   async findAll(userId: number): Promise<Cart[]> {
-    console.log('findAll');
     return this.cartModel.findAll({
       where: {
         userId,
@@ -50,7 +49,6 @@ export class CartService {
     });
   }
   findByUserIdAndProductId(userId: number, productId: number): Promise<Cart> {
-    console.log('findOne');
     return this.cartModel.findOne({
       where: {
         userId,

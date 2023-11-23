@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateIndividualCardDto } from './dto/create-individual-card.dto';
 import { IndividualCard } from './models/individual-card.model';
 import { InjectModel } from '@nestjs/sequelize';
-import { UpdateIndividualCardDto } from './dto/update-individual-card.dto';
+/* import { UpdateIndividualCardDto } from './dto/update-individual-card.dto'; */
 /* import { UpdateIndividualCardDto } from './dto/update-individual-card.dto'; */
 
 @Injectable()
@@ -51,10 +51,9 @@ export class IndividualCardService {
       },
     });
   }
-  update(id: number, updateIndividualCardDto: UpdateIndividualCardDto) {
-    console.log(updateIndividualCardDto);
+  /*   update(id: number, updateIndividualCardDto: UpdateIndividualCardDto) {
     return `This action updates a #${id} individualCard`;
-  }
+  } */
 
   remove(id: number) {
     return `This action removes a #${id} individualCard`;

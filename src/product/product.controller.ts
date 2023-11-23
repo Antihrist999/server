@@ -41,13 +41,8 @@ export class ProductController {
   })
   @ApiResponse({ status: 200, type: [Product] })
   findProductByName(@Param('name') name: string) {
-    console.log(name);
     return this.productService.findProductByName(name);
   }
-  /*  @Patch(':id')
-  update(@Param('id') id: string) {
-    return this.productService.update(+id);
-  } */
 
   @Delete(':id')
   @ApiOperation({

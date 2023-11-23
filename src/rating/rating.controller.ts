@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Rating } from './models/price.model';
+import { Rating } from './models/rating.model';
 import { CreateRatingDto } from './dto/create-rating.dto';
 import { RatingService } from './rating.service';
 
@@ -42,7 +42,17 @@ export class RatingController {
   findByProductId(@Param('productId') productId: number) {
     return this.ratingService.findByProductId(productId);
   }
-
+  @ApiOperation({
+    summary: 'Получить рейтинг пользователя по продукту',
+  })
+  @ApiResponse({ status: 200, type: [Rating] })
+  @Get('ratingUser/:productId,:userId')
+  findByProductIdAndUserId(
+    @Param('productId') productId: number,
+    @Param('userId') userId: number,
+  ) {
+    return this.ratingService.findByProductIdAndUserId(productId, userId);
+  }
   /*   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRatingDto: UpdateRatingDto) {
     return this.RatingService.update(+id, updateRatingDto);

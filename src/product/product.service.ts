@@ -17,7 +17,6 @@ export class ProductService {
   }
 
   async findAll(): Promise<Product[]> {
-    console.log(13);
     return this.ProductModel.findAll({
       include: { all: true },
     });
@@ -32,7 +31,6 @@ export class ProductService {
     });
   }
   findProductByName(name: string): Promise<Product[]> {
-    console.log(12);
     return this.ProductModel.findAll({
       where: {
         name: {
