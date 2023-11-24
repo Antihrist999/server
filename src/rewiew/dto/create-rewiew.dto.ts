@@ -10,5 +10,5 @@ export class CreateRewiewDto {
   userId: number;
 
   @ApiProperty({ description: 'Отзыв' })
-  message: number;
+  message: string;
 }

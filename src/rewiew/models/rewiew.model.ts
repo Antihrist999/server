@@ -23,5 +23,5 @@ export class Rewiew extends Model {
   userId: number;
   @Column
   @ApiProperty({ description: 'Отзыв' })
-  message: number;
+  message: string;
 }

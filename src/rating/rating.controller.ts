@@ -42,6 +42,15 @@ export class RatingController {
   findByProductId(@Param('productId') productId: number) {
     return this.ratingService.findByProductId(productId);
   }
+
+  @ApiOperation({
+    summary: 'Получить рейтинг продукта',
+  })
+  @ApiResponse({ status: 200, type: [Rating] })
+  @Get('stat/:productId')
+  findByProductIdStat(@Param('productId') productId: number) {
+    return this.ratingService.findByProductIdStat(productId);
+  }
   @ApiOperation({
     summary: 'Получить рейтинг пользователя по продукту',
   })

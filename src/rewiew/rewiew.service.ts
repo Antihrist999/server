@@ -32,7 +32,6 @@ export class RewiewService {
       include: { all: true },
     });
   }
-
   findOne(productId: number): Promise<Rewiew> {
     return this.RewiewModel.findOne({
       where: {
