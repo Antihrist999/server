@@ -10,6 +10,8 @@ import { CartModule } from './cart/cart.module';
 import { RatingModule } from './rating/rating.module';
 import { FavoriteModule } from './favorite/favorite.module';
 import { RewiewModule } from './rewiew/rewiew.module';
+import { NewspaperModule } from './newspaper/newspaper.module';
+import { PictureModule } from './picture/picture.module';
 
 @Module({
   imports: [
@@ -31,6 +33,8 @@ import { RewiewModule } from './rewiew/rewiew.module';
     RatingModule,
     FavoriteModule,
     RewiewModule,
+    NewspaperModule,
+    PictureModule,
   ],
   controllers: [AppController],
   providers: [AppService],

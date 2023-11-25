@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product.dto';
+import { CreateProductDto, ProductFiltered } from './dto/create-product.dto';
 import { ProductService } from './product.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Product } from './models/Product.model';
@@ -16,7 +16,14 @@ export class ProductController {
   create(@Body() createProductDto: CreateProductDto) {
     return this.productService.create(createProductDto);
   }
-
+  @Post('filtered/')
+  @ApiOperation({
+    summary: 'Фильтр',
+  })
+  @ApiResponse({ status: 200, type: Product })
+  filtered(@Body() createProductDto: ProductFiltered) {
+    return this.productService.filtered(createProductDto);
+  }
   @Get()
   @ApiOperation({
     summary: 'Получить все продукты',

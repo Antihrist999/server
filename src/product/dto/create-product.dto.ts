@@ -19,3 +19,12 @@ export class CreateProductDto {
   @HasOne(() => Price, 'userId')
   price: Price;
 }
+
+export class ProductFiltered {
+  @ApiProperty({ description: 'Минимальная сумма' })
+  minPrice: number;
+  @ApiProperty({ description: 'Максимальная сумма' })
+  maxPrice: number;
+  @ApiProperty({ description: 'Список категорий' })
+  category?: string[];
+}

@@ -5,7 +5,7 @@ import { Rewiew } from './models/rewiew.model';
 import { CreateRewiewDto } from './dto/create-rewiew.dto';
 import { RewiewService } from './rewiew.service';
 
-@ApiTags('Рейтинг')
+@ApiTags('Отзывы')
 @Controller('rewiews')
 export class RewiewController {
   constructor(private readonly rewiewService: RewiewService) {}
