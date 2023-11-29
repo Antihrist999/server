@@ -5,7 +5,7 @@ import { Picture } from './models/picture.model';
 import { CreatePictureDto } from './dto/create-picture.dto';
 import { PictureService } from './picture.service';
 
-@ApiTags('Отзывы')
+@ApiTags('Изображения')
 @Controller('pictures')
 export class PictureController {
   constructor(private readonly pictureService: PictureService) {}
